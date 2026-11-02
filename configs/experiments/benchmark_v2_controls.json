@@ -1,0 +1,237 @@
+{
+    "experiment_id":  "benchmark_v2_controls",
+    "description":  "Reviewer controls: no tuning; fixed full-model validation LR checked against original selection locks at prepare, copied and hashed in the source snapshot. Stats features are shape L plus detached mean and scale sqrt(var+1e-5), width L+2; output restoration unchanged.",
+    "datasets":  {
+                     "core20":  {
+                                    "filename":  "graph_tmf_20_tmf12.npz",
+                                    "sha256":  "ea40aff3d689440abec8b1c59db7f73ff815c19a6374f32b0efab298437fd04a",
+                                    "nodes":  20
+                                },
+                     "extended30":  {
+                                        "filename":  "graph_tmf_30_tmf12.npz",
+                                        "sha256":  "20926aa5826fe00776de7b3972d4c6d4c305e56b2241b66dfef5888d49232175",
+                                        "nodes":  30
+                                    }
+                 },
+    "tiers":  [
+                  "core20",
+                  "extended30"
+              ],
+    "seq_len":  12,
+    "pred_len":  12,
+    "split":  "chronological 70/10/20 as stored in each dataset; training-only channel scaling",
+    "loss":  "mean absolute error on vehicle counts (inverse training scaling)",
+    "selection_metric":  "validation MAE on vehicle counts",
+    "evaluation":  "test forecasts clipped at zero vehicles for every model; MAE, RMSE and WMAPE per horizon step",
+    "batch_size":  64,
+    "epochs":  50,
+    "max_train_batches":  500,
+    "patience":  8,
+    "lr_patience":  3,
+    "weight_decay":  0.0001,
+    "grad_clip":  5.0,
+    "num_workers":  0,
+    "torch_threads":  2,
+    "learning_rates":  [
+                           0.0005,
+                           0.001,
+                           0.002
+                       ],
+    "tuning_seed":  2025,
+    "final_seeds":  [
+                        2026,
+                        2027,
+                        2028
+                    ],
+    "models":  [
+                   "st_itransformer"
+               ],
+    "heavy_models":  [
+
+                     ],
+    "excluded_models":  {
+                            "d2stgnn":  "about 0.2 s per batch and 23 GB with 240-360 movement nodes; excluded before any result for computational cost"
+                        },
+    "ablation_selection":  "st_itransformer",
+    "ablations":  {
+
+                  },
+    "graph":  "movement-level corridor graph (experiments/movement_graph.py); graph baselines receive the same graph",
+    "historical_results_pooled":  false,
+    "data_public_release":  false,
+    "fixed_learning_rates":  {
+                                 "core20":  0.002,
+                                 "extended30":  0.002
+                             },
+    "verify_fixed_learning_rate_locks":  true,
+    "variants":  {
+                     "stats_restoration":  {
+                                               "model":  "st_itransformer",
+                                               "options":  {
+                                                               "input_mode":  "stats_restoration",
+                                                               "use_context":  true,
+                                                               "use_identity":  true,
+                                                               "use_calendar":  true,
+                                                               "use_intersection_id":  true,
+                                                               "use_movement_id":  true,
+                                                               "use_time_of_day":  true,
+                                                               "use_weekday":  true,
+                                                               "cross_attention":  true,
+                                                               "refinement":  "movement",
+                                                               "use_fusion":  true,
+                                                               "d_model":  128,
+                                                               "n_heads":  8,
+                                                               "e_layers":  2,
+                                                               "d_ff":  256,
+                                                               "dropout":  0.05
+                                                           }
+                                           },
+                     "no_window_norm":  {
+                                            "model":  "st_itransformer",
+                                            "options":  {
+                                                            "input_mode":  "no_window_norm",
+                                                            "use_context":  true,
+                                                            "use_identity":  true,
+                                                            "use_calendar":  true,
+                                                            "use_intersection_id":  true,
+                                                            "use_movement_id":  true,
+                                                            "use_time_of_day":  true,
+                                                            "use_weekday":  true,
+                                                            "cross_attention":  true,
+                                                            "refinement":  "movement",
+                                                            "use_fusion":  true,
+                                                            "d_model":  128,
+                                                            "n_heads":  8,
+                                                            "e_layers":  2,
+                                                            "d_ff":  256,
+                                                            "dropout":  0.05
+                                                        }
+                                        },
+                     "no_cross_attention":  {
+                                                "model":  "st_itransformer",
+                                                "options":  {
+                                                                "input_mode":  "level_history",
+                                                                "use_context":  true,
+                                                                "use_identity":  true,
+                                                                "use_calendar":  true,
+                                                                "use_intersection_id":  true,
+                                                                "use_movement_id":  true,
+                                                                "use_time_of_day":  true,
+                                                                "use_weekday":  true,
+                                                                "cross_attention":  false,
+                                                                "refinement":  "none",
+                                                                "use_fusion":  false,
+                                                                "d_model":  128,
+                                                                "n_heads":  8,
+                                                                "e_layers":  2,
+                                                                "d_ff":  256,
+                                                                "dropout":  0.05
+                                                            }
+                                            },
+                     "no_intersection_id":  {
+                                                "model":  "st_itransformer",
+                                                "options":  {
+                                                                "input_mode":  "level_history",
+                                                                "use_context":  true,
+                                                                "use_identity":  true,
+                                                                "use_calendar":  true,
+                                                                "use_intersection_id":  false,
+                                                                "use_movement_id":  true,
+                                                                "use_time_of_day":  true,
+                                                                "use_weekday":  true,
+                                                                "cross_attention":  true,
+                                                                "refinement":  "movement",
+                                                                "use_fusion":  true,
+                                                                "d_model":  128,
+                                                                "n_heads":  8,
+                                                                "e_layers":  2,
+                                                                "d_ff":  256,
+                                                                "dropout":  0.05
+                                                            }
+                                            },
+                     "no_movement_id":  {
+                                            "model":  "st_itransformer",
+                                            "options":  {
+                                                            "input_mode":  "level_history",
+                                                            "use_context":  true,
+                                                            "use_identity":  true,
+                                                            "use_calendar":  true,
+                                                            "use_intersection_id":  true,
+                                                            "use_movement_id":  false,
+                                                            "use_time_of_day":  true,
+                                                            "use_weekday":  true,
+                                                            "cross_attention":  true,
+                                                            "refinement":  "movement",
+                                                            "use_fusion":  true,
+                                                            "d_model":  128,
+                                                            "n_heads":  8,
+                                                            "e_layers":  2,
+                                                            "d_ff":  256,
+                                                            "dropout":  0.05
+                                                        }
+                                        },
+                     "no_time_of_day":  {
+                                            "model":  "st_itransformer",
+                                            "options":  {
+                                                            "input_mode":  "level_history",
+                                                            "use_context":  true,
+                                                            "use_identity":  true,
+                                                            "use_calendar":  true,
+                                                            "use_intersection_id":  true,
+                                                            "use_movement_id":  true,
+                                                            "use_time_of_day":  false,
+                                                            "use_weekday":  true,
+                                                            "cross_attention":  true,
+                                                            "refinement":  "movement",
+                                                            "use_fusion":  true,
+                                                            "d_model":  128,
+                                                            "n_heads":  8,
+                                                            "e_layers":  2,
+                                                            "d_ff":  256,
+                                                            "dropout":  0.05
+                                                        }
+                                        },
+                     "no_weekday":  {
+                                        "model":  "st_itransformer",
+                                        "options":  {
+                                                        "input_mode":  "level_history",
+                                                        "use_context":  true,
+                                                        "use_identity":  true,
+                                                        "use_calendar":  true,
+                                                        "use_intersection_id":  true,
+                                                        "use_movement_id":  true,
+                                                        "use_time_of_day":  true,
+                                                        "use_weekday":  false,
+                                                        "cross_attention":  true,
+                                                        "refinement":  "movement",
+                                                        "use_fusion":  true,
+                                                        "d_model":  128,
+                                                        "n_heads":  8,
+                                                        "e_layers":  2,
+                                                        "d_ff":  256,
+                                                        "dropout":  0.05
+                                                    }
+                                    },
+                     "within_intersection_graph":  {
+                                                       "model":  "st_itransformer",
+                                                       "options":  {
+                                                                       "input_mode":  "level_history",
+                                                                       "use_context":  true,
+                                                                       "use_identity":  true,
+                                                                       "use_calendar":  true,
+                                                                       "use_intersection_id":  true,
+                                                                       "use_movement_id":  true,
+                                                                       "use_time_of_day":  true,
+                                                                       "use_weekday":  true,
+                                                                       "cross_attention":  true,
+                                                                       "refinement":  "within_intersection",
+                                                                       "use_fusion":  true,
+                                                                       "d_model":  128,
+                                                                       "n_heads":  8,
+                                                                       "e_layers":  2,
+                                                                       "d_ff":  256,
+                                                                       "dropout":  0.05
+                                                                   }
+                                                   }
+                 }
+}

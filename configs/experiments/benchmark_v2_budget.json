@@ -1,0 +1,85 @@
+{
+  "experiment_id": "benchmark_v2_budget",
+  "description": "Training-budget robustness for ST-iTransformer and its two strongest baselines, Graph WaveNet and STID, on both tiers. Equal protocol: up to 150 x 500 batches, early-stopping patience 15 and ReduceLROnPlateau patience 5. The log2-spaced grid {5e-4,1e-3,2e-3,4e-3,8e-3} retains every original candidate and adds two above the former boundary optimum 2e-3, bracketing that optimum on both sides without model-specific search. Keep 500-batch epochs to isolate budget/search sensitivity and use measured epoch times; full epochs would change optimizer-step exposure and exceed a defensible time estimate. This jointly tests a larger budget and wider search, not their separate causal effects. Tune only on validation MAE at seed 2025 (ties: smaller LR), then evaluate fixed seeds 2026-2028; retain all favorable and unfavorable results, including cap hits and boundary LR choices. A remaining boundary optimum or improving-at-cap run is unresolved convergence, never evidence of convergence.",
+  "datasets": {
+    "core20": {
+      "filename": "graph_tmf_20_tmf12.npz",
+      "sha256": "ea40aff3d689440abec8b1c59db7f73ff815c19a6374f32b0efab298437fd04a",
+      "nodes": 20
+    },
+    "extended30": {
+      "filename": "graph_tmf_30_tmf12.npz",
+      "sha256": "20926aa5826fe00776de7b3972d4c6d4c305e56b2241b66dfef5888d49232175",
+      "nodes": 30
+    }
+  },
+  "tiers": [
+    "core20",
+    "extended30"
+  ],
+  "seq_len": 12,
+  "pred_len": 12,
+  "split": "chronological 70/10/20 as stored in each dataset; training-only channel scaling",
+  "loss": "mean absolute error on vehicle counts (inverse training scaling)",
+  "selection_metric": "validation MAE on vehicle counts",
+  "evaluation": "test forecasts clipped at zero vehicles for every model; MAE, RMSE and WMAPE per horizon step",
+  "batch_size": 64,
+  "epochs": 150,
+  "max_train_batches": 500,
+  "patience": 15,
+  "lr_patience": 5,
+  "weight_decay": 0.0001,
+  "grad_clip": 5.0,
+  "num_workers": 0,
+  "torch_threads": 2,
+  "learning_rates": [
+    0.0005,
+    0.001,
+    0.002,
+    0.004,
+    0.008
+  ],
+  "tuning_seed": 2025,
+  "final_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "models": [
+    "gwnet",
+    "st_itransformer",
+    "stid"
+  ],
+  "heavy_models": [],
+  "ablations": {},
+  "graph": "movement-level corridor graph (experiments/movement_graph.py); graph baselines receive the same graph",
+  "historical_results_pooled": false,
+  "data_public_release": false,
+  "runtime_estimate": {
+    "source": "results/benchmark_v2/summary.json; final-seed mean seconds_per_epoch, measured with 3 jobs/GPU; includes validation",
+    "gpus": 2,
+    "workers_per_gpu": 3,
+    "tuning_runs": 30,
+    "final_runs": 18,
+    "max_epochs_total": 7200,
+    "seconds_per_epoch": {
+      "core20": {
+        "gwnet": 40.37082746483643,
+        "st_itransformer": 9.236921328666698,
+        "stid": 7.329759972158823
+      },
+      "extended30": {
+        "gwnet": 55.550763324000094,
+        "st_itransformer": 16.9412589939998,
+        "stid": 12.368120424992421
+      }
+    },
+    "all_cap_ideal_hours": 7.877647306036347,
+    "all_cap_ready_queue_hours": 8.311846485861032,
+    "planning_range_hours": [
+      9,
+      12
+    ],
+    "assumptions": "Six workers, original ready-job order, unchanged sharing speeds for all LRs and all epochs; no other GPU workload. Queue simulation excludes 20-second launch staggering, polling, graph/data loading, checkpoint/NPZ/test I/O. Allow overhead within 9-12 hours; this is an estimate, not a deadline guarantee. Early stopping can shorten it; contention, LR-dependent runtime or disk I/O can lengthen it. Do not truncate jobs or choose results to meet wall-clock target."
+  }
+}

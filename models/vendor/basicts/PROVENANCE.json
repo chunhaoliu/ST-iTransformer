@@ -1,0 +1,117 @@
+{
+ "repository": "https://github.com/GestaltCogTeam/BasicTS",
+ "commit": "c218c07b6ce5e4cf908b147fd180c486346fed9c",
+ "note": "Last commit before v1.0.0 removed baselines/ (parent of 0519d9b). Retrieved 2026-10-25 with user approval. Original bytes, no changes.",
+ "license": "Apache-2.0 (LICENSE)",
+ "adapter": "../../tmf_v2.py",
+ "files": {
+  "baselines/AGCRN/arch/__init__.py": {
+   "sha256": "ff9e8d4ed57a20c5526c59fe63a8fdf2ec5db741d0843a6bdffadeccec20191b",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/AGCRN/arch/__init__.py"
+  },
+  "baselines/AGCRN/arch/agcn.py": {
+   "sha256": "4ba649a3a109c0be68021b8cfab13b1e753237e5c03e955c2df940076963f0c1",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/AGCRN/arch/agcn.py"
+  },
+  "baselines/AGCRN/arch/agcrn_arch.py": {
+   "sha256": "ce1f4f7efb9d6e6452400996e05fb66f688469b633be508b3d5b7244a76f9d29",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/AGCRN/arch/agcrn_arch.py"
+  },
+  "baselines/AGCRN/arch/agcrn_cell.py": {
+   "sha256": "1bb012307a712797c168478223fb5ac89d625c604e0ae52e5a64fae73b15dc2c",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/AGCRN/arch/agcrn_cell.py"
+  },
+  "baselines/D2STGNN/arch/__init__.py": {
+   "sha256": "eee420e39685ef04c3658b5a51717c4e6ccc6509841b970c19b833998ccdd45b",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/__init__.py"
+  },
+  "baselines/D2STGNN/arch/d2stgnn_arch.py": {
+   "sha256": "062ac2528c2dc0269a2ccf77fcef9fd42a9b4a55ac3fe6779671abf1b26e542c",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/d2stgnn_arch.py"
+  },
+  "baselines/D2STGNN/arch/decouple/estimation_gate.py": {
+   "sha256": "e6ff19e00881e5237335df6c0382665fa079c040867f138191f75c4908369d77",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/decouple/estimation_gate.py"
+  },
+  "baselines/D2STGNN/arch/decouple/residual_decomp.py": {
+   "sha256": "c4167a0490062ea95b392758a1436bd94b317bfb06d75f12f173661348896b83",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/decouple/residual_decomp.py"
+  },
+  "baselines/D2STGNN/arch/difusion_block/__init__.py": {
+   "sha256": "6acbbf56c1be8aa01a425bc8f2f169fb9d5d9da0a780ba2535ab459f9c2c2c2f",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/difusion_block/__init__.py"
+  },
+  "baselines/D2STGNN/arch/difusion_block/dif_block.py": {
+   "sha256": "1093cd6f4851d4e5080da1461d8cdcb9be127ac2d8480a0e3a34f80724ae470c",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/difusion_block/dif_block.py"
+  },
+  "baselines/D2STGNN/arch/difusion_block/dif_model.py": {
+   "sha256": "c146d8ef4af166148857e69ef225ff497789ac7d393ecaaa73f215cac9c00ded",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/difusion_block/dif_model.py"
+  },
+  "baselines/D2STGNN/arch/difusion_block/forecast.py": {
+   "sha256": "e27e2f0d485eca8b0a02590b46ed88c58f96ead3155f3688d155402a2668c890",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/difusion_block/forecast.py"
+  },
+  "baselines/D2STGNN/arch/dynamic_graph_conv/dy_graph_conv.py": {
+   "sha256": "e360f6bf1dbd2953a297e53cef2af0ddccd1a4b6832866f11887d1778806bc2e",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/dynamic_graph_conv/dy_graph_conv.py"
+  },
+  "baselines/D2STGNN/arch/dynamic_graph_conv/utils/__init__.py": {
+   "sha256": "79a36abf7288af8e21df530e5e0390ed0637e7071b6529d5fdbda9618687c708",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/dynamic_graph_conv/utils/__init__.py"
+  },
+  "baselines/D2STGNN/arch/dynamic_graph_conv/utils/distance.py": {
+   "sha256": "01254b15df572387ff2d5389d14c64f49cf7671d9735f949cef9ac8eccd1dd9e",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/dynamic_graph_conv/utils/distance.py"
+  },
+  "baselines/D2STGNN/arch/dynamic_graph_conv/utils/mask.py": {
+   "sha256": "8605f9189acd7d686a97956f60cddf9559c5dc420be37c8655fa76a38644ab1f",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/dynamic_graph_conv/utils/mask.py"
+  },
+  "baselines/D2STGNN/arch/dynamic_graph_conv/utils/normalizer.py": {
+   "sha256": "3b4f09e9ed0230225b3cde28f27a20c587e683a019cc50c944bfeae57d51e230",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/dynamic_graph_conv/utils/normalizer.py"
+  },
+  "baselines/D2STGNN/arch/inherent_block/__init__.py": {
+   "sha256": "2be3e32edb8b0ca2e56ec757c85e56a7aaad6d9077aaaa1c36675466448f15bf",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/inherent_block/__init__.py"
+  },
+  "baselines/D2STGNN/arch/inherent_block/forecast.py": {
+   "sha256": "961f36773c3020aee6c60f05b205ec365d8ea11bd4b0a576aeeec7de1a0eecc1",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/inherent_block/forecast.py"
+  },
+  "baselines/D2STGNN/arch/inherent_block/inh_block.py": {
+   "sha256": "ffad030102ca07183752584f2c646ac401ad3ff4e95959ca13336e93b4b55f02",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/inherent_block/inh_block.py"
+  },
+  "baselines/D2STGNN/arch/inherent_block/inh_model.py": {
+   "sha256": "fd4b3f8704ec6a388985d2e6b0689c060b8eff87b6d3599cc843ec0e7ba28992",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/D2STGNN/arch/inherent_block/inh_model.py"
+  },
+  "baselines/GWNet/arch/__init__.py": {
+   "sha256": "95dbcd653efecbe60b99d6f39ac578cce306aa0a4331cb6e2c1b595cba16f306",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/GWNet/arch/__init__.py"
+  },
+  "baselines/GWNet/arch/gwnet_arch.py": {
+   "sha256": "de17f1741fe4164331957e4ae29804b65ee55b81ce793ee99a84be55198f026c",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/GWNet/arch/gwnet_arch.py"
+  },
+  "baselines/STGCN/arch/__init__.py": {
+   "sha256": "cb3f5e4270854edc598ee108ef3f0a83ca22cda5ce287f6b68dd06ba38cb2d92",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/STGCN/arch/__init__.py"
+  },
+  "baselines/STGCN/arch/stgcn_arch.py": {
+   "sha256": "ae507bf3c465a7c687a723f9979bd67952559dfdf73804202fde9002217d0f66",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/STGCN/arch/stgcn_arch.py"
+  },
+  "baselines/STGCN/arch/stgcn_layers.py": {
+   "sha256": "e94802be4763378bba6253b0b8ba93156a266ab3d1c31184a54e986b82b7fe93",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/baselines/STGCN/arch/stgcn_layers.py"
+  },
+  "LICENSE": {
+   "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+   "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/BasicTS/c218c07b6ce5e4cf908b147fd180c486346fed9c/LICENSE"
+  }
+ }
+}

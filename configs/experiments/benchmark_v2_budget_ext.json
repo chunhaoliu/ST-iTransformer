@@ -1,0 +1,58 @@
+{
+    "experiment_id": "benchmark_v2_budget_ext",
+    "description": "150x500 budget extension for HimNet via unchanged pinned adapter and calendar-enabled STAEformer. All protocol fields match benchmark_v2_budget except models and the learning-rate grid, which is the original five-rate grid plus 0.00025 (six rates), so it brackets the original Extended30 STAEformer selection of 0.0005. Validation only at 2025; finals 2026-2028.",
+    "datasets": {
+        "core20": {
+            "filename": "graph_tmf_20_tmf12.npz",
+            "sha256": "ea40aff3d689440abec8b1c59db7f73ff815c19a6374f32b0efab298437fd04a",
+            "nodes": 20
+        },
+        "extended30": {
+            "filename": "graph_tmf_30_tmf12.npz",
+            "sha256": "20926aa5826fe00776de7b3972d4c6d4c305e56b2241b66dfef5888d49232175",
+            "nodes": 30
+        }
+    },
+    "tiers": [
+        "core20",
+        "extended30"
+    ],
+    "seq_len": 12,
+    "pred_len": 12,
+    "split": "chronological 70/10/20 as stored in each dataset; training-only channel scaling",
+    "loss": "mean absolute error on vehicle counts (inverse training scaling)",
+    "selection_metric": "validation MAE on vehicle counts",
+    "evaluation": "test forecasts clipped at zero vehicles for every model; MAE, RMSE and WMAPE per horizon step",
+    "batch_size": 64,
+    "epochs": 150,
+    "max_train_batches": 500,
+    "patience": 15,
+    "lr_patience": 5,
+    "weight_decay": 0.0001,
+    "grad_clip": 5.0,
+    "num_workers": 0,
+    "torch_threads": 2,
+    "learning_rates": [
+        0.00025,
+        0.0005,
+        0.001,
+        0.002,
+        0.004,
+        0.008
+    ],
+    "tuning_seed": 2025,
+    "final_seeds": [
+        2026,
+        2027,
+        2028
+    ],
+    "models": [
+        "himnet",
+        "staeformer"
+    ],
+    "heavy_models": [],
+    "ablations": {},
+    "graph": "movement-level corridor graph (experiments/movement_graph.py); graph baselines receive the same graph",
+    "historical_results_pooled": false,
+    "data_public_release": false
+}

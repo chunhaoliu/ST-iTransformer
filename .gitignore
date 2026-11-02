@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+data/
+outputs/
+*.npz
+*.pt
+*.pth
+*.ckpt
+external/STAEformer.py
+external/himnet/HimNet*

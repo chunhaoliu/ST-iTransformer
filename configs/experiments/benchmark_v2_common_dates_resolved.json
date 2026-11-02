@@ -1,0 +1,57 @@
+{
+  "ablation_selection": "st_itransformer",
+  "ablations": {},
+  "batch_size": 64,
+  "common_date_manifest_sha256": "673a5cf91454deaae3db89c214599fe3fadffb3057cc8e8864588c35e5719b9a",
+  "data_public_release": false,
+  "datasets": {
+    "core20_common": {
+      "filename": "graph_tmf_20_common_tmf12.npz",
+      "nodes": 20,
+      "sha256": "6f50a01d02d917a499289b99f96293a532339d330a3d8f37c3730aa982717fac"
+    }
+  },
+  "description": "Core20 restricted exactly to Extended30 timestamps and split indices by experiments.build_common_date_dataset. Reviewer must replace SHA256_AFTER_BUILD with manifest output_sha256 before prepare. Full validation-only LR search; three final seeds. HimNet uses the pinned adapter.",
+  "epochs": 50,
+  "evaluation": "test forecasts clipped at zero vehicles for every model; MAE, RMSE and WMAPE per horizon step",
+  "excluded_models": {
+    "d2stgnn": "about 0.2 s per batch and 23 GB with 240-360 movement nodes; excluded before any result for computational cost"
+  },
+  "experiment_id": "benchmark_v2_common_dates",
+  "final_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "grad_clip": 5.0,
+  "graph": "movement-level corridor graph (experiments/movement_graph.py); graph baselines receive the same graph",
+  "heavy_models": [],
+  "historical_results_pooled": false,
+  "learning_rates": [
+    0.0005,
+    0.001,
+    0.002
+  ],
+  "loss": "mean absolute error on vehicle counts (inverse training scaling)",
+  "lr_patience": 3,
+  "max_train_batches": 500,
+  "models": [
+    "st_itransformer",
+    "gwnet",
+    "stid",
+    "staeformer",
+    "himnet"
+  ],
+  "num_workers": 0,
+  "patience": 8,
+  "pred_len": 12,
+  "selection_metric": "validation MAE on vehicle counts",
+  "seq_len": 12,
+  "split": "Exact Extended30 dates and chronological train_end/val_end; recomputed Core20 training-only channel scaling",
+  "tiers": [
+    "core20_common"
+  ],
+  "torch_threads": 2,
+  "tuning_seed": 2025,
+  "weight_decay": 0.0001
+}

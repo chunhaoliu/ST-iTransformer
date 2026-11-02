@@ -1,0 +1,6 @@
+# Canonical TMF code and paper-artifact dependencies
+numpy
+pandas
+PyYAML
+matplotlib
+torch

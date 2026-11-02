@@ -1,0 +1,50 @@
+{
+  "status": "source_verified_runtime_validation_pending",
+  "retrieved": "2026-10-04",
+  "files": {
+    "dlinear.py": {
+      "repository": "https://github.com/cure-lab/LTSF-Linear",
+      "commit": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+      "upstream_path": "models/DLinear.py",
+      "source_url": "https://raw.githubusercontent.com/cure-lab/LTSF-Linear/0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6/models/DLinear.py",
+      "sha256": "0893b53cb6473d6bdca7aeca514cb3ee12efa6df227c29c4469571c9711451cc",
+      "changes": "none; original bytes, local filename only",
+      "license_file": "LICENSE-LTSF-Linear",
+      "paper": "https://arxiv.org/abs/2205.13504"
+    },
+    "stid_arch.py": {
+      "repository": "https://github.com/GestaltCogTeam/STID",
+      "commit": "e8b313bc591bdd0101a1619962c9b503e75127c0",
+      "upstream_path": "stid/arch/stid_arch.py",
+      "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/STID/e8b313bc591bdd0101a1619962c9b503e75127c0/stid/arch/stid_arch.py",
+      "sha256": "14105cbbb9265179f9c61a741db2b20e64cd999145f412cfe6d32b75c86d34b0",
+      "changes": "none; original bytes",
+      "license_file": "LICENSE-STID",
+      "paper": "https://arxiv.org/abs/2208.05233"
+    },
+    "mlp.py": {
+      "repository": "https://github.com/GestaltCogTeam/STID",
+      "commit": "e8b313bc591bdd0101a1619962c9b503e75127c0",
+      "upstream_path": "stid/arch/mlp.py",
+      "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/STID/e8b313bc591bdd0101a1619962c9b503e75127c0/stid/arch/mlp.py",
+      "sha256": "c05f2b5b80f378cd8dbe432a019de1e9f0f88c4b8fb672ce741ebb269e197522",
+      "changes": "none; original bytes",
+      "license_file": "LICENSE-STID"
+    },
+    "LICENSE-LTSF-Linear": {
+      "source_url": "https://raw.githubusercontent.com/cure-lab/LTSF-Linear/0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6/LICENSE",
+      "sha256": "195440db73029b048f34f3a8509add1611d6608e1edafb766eb398a65300f7a2"
+    },
+    "LICENSE-STID": {
+      "source_url": "https://raw.githubusercontent.com/GestaltCogTeam/STID/e8b313bc591bdd0101a1619962c9b503e75127c0/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  },
+  "adapter_boundary": {
+    "implementation": "../modern_baselines.py",
+    "dlinear": "Flatten node and movement axes to variates; keep kernel=25, native initialization, no RevIN; shared/individual is explicit.",
+    "stid": "STID-no-calendar only: each node-movement is an identity, input_dim=1, official default embed/node widths=32, 3 residual MLPs and dropout=0.15. Calendar embeddings disabled to match the no-calendar main inputs. Not the full calendar-enabled STID configuration.",
+    "training": "Common chronological TMF harness would be an adaptation, not reproduction of published benchmark numbers. No training or performance claim yet. Must test, validate-tune and label variants before manuscript use.",
+    "registry": "Not yet registered. Existing experiments remain unchanged until runtime tests pass."
+  }
+}

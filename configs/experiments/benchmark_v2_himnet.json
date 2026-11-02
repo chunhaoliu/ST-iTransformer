@@ -1,0 +1,69 @@
+{
+  "experiment_id": "benchmark_v2_himnet",
+  "description": "Separate frozen ninth comparator baseline (nine existing learned rows include our model). HimNet KDD 2024 Dong et al.; unmodified official commit 2a9aa44d1864f6fb60bdf9d14bafd6c1681e81a5. Core20: PEMS04 (307 closest to 240 movement nodes), Extended30: PEMS03 (358 closest to 360). hidden_dim64, cheb_k2, layers1, node/st embeddings16/16, TOD/DOW12/4 and8/8 respectively, tf_decay_steps4000, teacher forcing enabled only during training; future TOD/DOW are known target calendar labels. Shared protocol replaces official batch16, milestone schedule, max_epochs200, early_stop20, Adam eps0.001 with AdamW defaults, batch64, 50x500, plateau patience3 (reduce after four bad epochs), early stop8, wd1e-4, three-LR validation search. Same train-only per-channel scaling, vehicle MAE, clipping and metrics; learned adaptive graph as official (no supplied corridor graph). Source and configs SHA256 verified before prepare and import. No original/completed experiment modified. Adapter checkpoints each official decoder step during training (no numerical/model change; curriculum RNG outside recomputation), reducing retained meta-weight activations at batch64; adds recomputation overhead. Official source remains unmodified.",
+  "datasets": {
+    "core20": {
+      "filename": "graph_tmf_20_tmf12.npz",
+      "sha256": "ea40aff3d689440abec8b1c59db7f73ff815c19a6374f32b0efab298437fd04a",
+      "nodes": 20
+    },
+    "extended30": {
+      "filename": "graph_tmf_30_tmf12.npz",
+      "sha256": "20926aa5826fe00776de7b3972d4c6d4c305e56b2241b66dfef5888d49232175",
+      "nodes": 30
+    }
+  },
+  "tiers": [
+    "core20",
+    "extended30"
+  ],
+  "seq_len": 12,
+  "pred_len": 12,
+  "split": "chronological 70/10/20 as stored in each dataset; training-only channel scaling",
+  "loss": "mean absolute error on vehicle counts (inverse training scaling)",
+  "selection_metric": "validation MAE on vehicle counts",
+  "evaluation": "test forecasts clipped at zero vehicles for every model; MAE, RMSE and WMAPE per horizon step",
+  "batch_size": 64,
+  "epochs": 50,
+  "max_train_batches": 500,
+  "patience": 8,
+  "lr_patience": 3,
+  "weight_decay": 0.0001,
+  "grad_clip": 5.0,
+  "num_workers": 0,
+  "torch_threads": 2,
+  "learning_rates": [
+    0.0005,
+    0.001,
+    0.002
+  ],
+  "tuning_seed": 2025,
+  "final_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "models": [
+    "himnet"
+  ],
+  "heavy_models": [],
+  "excluded_models": {
+    "d2stgnn": "about 0.2 s per batch and 23 GB with 240-360 movement nodes; excluded before any result for computational cost"
+  },
+  "ablation_selection": "st_itransformer",
+  "ablations": {},
+  "graph": "movement-level corridor graph (experiments/movement_graph.py); graph baselines receive the same graph",
+  "historical_results_pooled": false,
+  "data_public_release": false,
+  "runtime_estimate": {
+    "runs": 12,
+    "tuning": 6,
+    "final": 6,
+    "planning_hours": [
+      4,
+      10
+    ],
+    "reason": "Original AGCRN means108.65/121.68s per epoch imply3.20h for12runs at50epochs on6workers assuming unchanged per-job throughput. HimNet has two64-unit recurrent encoders plus12step meta-parameter decoder and training decoder checkpoint recomputation. 4-10h provisional allowance; early stopping, queue, memory contention and actual hardware can change it. No GPU runtime or peak memory measured.",
+    "agcrn_full_cap_ideal_hours": 3.199004550249999
+  }
+}
